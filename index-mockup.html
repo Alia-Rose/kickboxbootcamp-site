@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kickbox Bootcamp - Dynamic Kickboxing Workouts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #E53935;
+            --accent: #FF6F00;
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(229, 57, 53, 0.1) 50px,
+                    rgba(229, 57, 53, 0.1) 100px
+                );
+        }
+
+        .glow-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229, 57, 53, 0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            pointer-events: none;
+            z-index: 0;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .glow-orb-2 {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 111, 0, 0.1) 0%, transparent 70%);
+            bottom: -100px;
+            left: -100px;
+            pointer-events: none;
+            z-index: 0;
+            animation: pulse 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 24px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(229, 57, 53, 0.1);
+            border: 1px solid rgba(229, 57, 53, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--gradient);
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4rem, 15vw, 10rem);
+            line-height: 0.9;
+            letter-spacing: -2px;
+            margin-bottom: 8px;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+
+        .logo-kickbox {
+            display: block;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-bootcamp {
+            display: block;
+            color: var(--text-primary);
+            font-size: 0.5em;
+            letter-spacing: 20px;
+            margin-left: 24px;
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 400px;
+            line-height: 1.6;
+            margin-bottom: 48px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .cta-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .play-store-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--text-primary);
+            color: var(--bg-dark);
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 24px rgba(255, 255, 255, 0.1);
+        }
+
+        .play-store-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.15);
+        }
+
+        .play-store-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .free-trial {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .free-trial strong {
+            color: var(--accent);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 24px 120px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(229, 57, 53, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .feature-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .logo-bootcamp {
+                letter-spacing: 10px;
+                margin-left: 12px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                gap: 24px;
+            }
+        }
+    </style>
+    <script>
+        // Handle referral deep links
+        (function() {
+            var path = window.location.pathname;
+            var match = path.match(/\/ref\/([A-Z0-9]+)/i);
+            if (match) {
+                var code = match[1].toUpperCase();
+                var appLink = 'kickbox://ref/' + code;
+                var playStoreLink = 'https://play.google.com/store/apps/details?id=com.kickboxbootcamp&referrer=ref_' + code;
+                var start = Date.now();
+                window.location = appLink;
+                setTimeout(function() {
+                    if (Date.now() - start < 2000) {
+                        window.location = playStoreLink;
+                    }
+                }, 1500);
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb-2"></div>
+
+    <section class="hero">
+        <div class="badge">Available on Android</div>
+        <h1 class="logo">
+            <span class="logo-kickbox">KICKBOX</span>
+            <span class="logo-bootcamp">BOOTCAMP</span>
+        </h1>
+        <p class="tagline">Dynamic kickboxing workouts that keep you moving. Every session unique. Every punch counts.</p>
+        <div class="cta-container">
+            <a href="https://play.google.com/store/apps/details?id=com.kickboxbootcamp" class="play-store-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                </svg>
+                Get it on Google Play
+            </a>
+            <p class="free-trial"><strong>14-day free trial</strong> • No credit card required</p>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🥊</div>
+                <h3 class="feature-title">Unlimited Workouts</h3>
+                <p class="feature-desc">Boxing, kickboxing, and bodyweight combos that never repeat. Fresh routines every time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Customizable</h3>
+                <p class="feature-desc">Set your duration, intensity, and focus areas. Your workout, your rules.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔊</div>
+                <h3 class="feature-title">Audio Coaching</h3>
+                <p class="feature-desc">Real-time voice guidance keeps you on track. Just press play and follow along.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <nav class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-of-service.html">Terms of Service</a>
+            <a href="mailto:smallempirestudiosofficial@gmail.com">Contact</a>
+        </nav>
+        <p class="copyright">© 2025 Small Empire Studios. All rights reserved.</p>
+    </footer>
+</body>
+</html>
