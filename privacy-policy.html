@@ -4,7 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - Kickbox Bootcamp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #E53935;
+            --accent: #FF6F00;
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,10 +25,10 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            font-family: 'Barlow', sans-serif;
+            background: var(--bg-dark);
             min-height: 100vh;
-            color: #ffffff;
+            color: var(--text-primary);
             padding: 40px 20px;
             line-height: 1.7;
         }
@@ -27,10 +40,11 @@
 
         .back-link {
             display: inline-block;
-            color: #FF8C42;
+            color: var(--accent);
             text-decoration: none;
             margin-bottom: 24px;
             font-size: 0.95rem;
+            font-weight: 500;
         }
 
         .back-link:hover {
@@ -38,9 +52,10 @@
         }
 
         h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, #FF6347, #FF8C42);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 2px;
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -48,22 +63,23 @@
         }
 
         .last-updated {
-            color: #666;
+            color: var(--text-secondary);
             font-size: 0.9rem;
             margin-bottom: 32px;
         }
 
         .content {
-            background: #1C1C1E;
+            background: var(--bg-card);
             border-radius: 16px;
             padding: 32px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         h2 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #FF8C42;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--accent);
             margin-top: 32px;
             margin-bottom: 16px;
         }
@@ -88,16 +104,16 @@
         }
 
         strong {
-            color: #fff;
+            color: var(--text-primary);
         }
 
         a {
-            color: #FF8C42;
+            color: var(--accent);
         }
 
         .highlight {
-            background: rgba(255, 140, 66, 0.1);
-            border-left: 3px solid #FF8C42;
+            background: rgba(255, 111, 0, 0.1);
+            border-left: 3px solid var(--accent);
             padding: 16px;
             border-radius: 0 8px 8px 0;
             margin: 16px 0;
@@ -106,16 +122,16 @@
         .footer {
             text-align: center;
             margin-top: 40px;
-            color: #555;
+            color: var(--text-secondary);
             font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="index.html" class="back-link">&larr; Back to Legal Documents</a>
+        <a href="index.html" class="back-link">&larr; Back to Home</a>
 
-        <h1>Privacy Policy</h1>
+        <h1>PRIVACY POLICY</h1>
         <p class="last-updated">Last Updated: January 6, 2025</p>
 
         <div class="content">
@@ -226,7 +242,7 @@
             <h2>11. Contact Us</h2>
             <p>If you have questions about this Privacy Policy or your data, contact us at:</p>
             <ul>
-                <li>Email: <a href="mailto:privacy@kickboxbootcamp.com">privacy@kickboxbootcamp.com</a></li>
+                <li>Email: <a href="mailto:smallempirestudiosofficial@gmail.com">smallempirestudiosofficial@gmail.com</a></li>
             </ul>
 
             <h2>12. California Residents (CCPA)</h2>
@@ -250,7 +266,7 @@
         </div>
 
         <div class="footer">
-            <p>&copy; 2025 Kickbox Bootcamp. All rights reserved.</p>
+            <p>&copy; 2026 Small Empire Studios. All rights reserved.</p>
         </div>
     </div>
 </body>
