@@ -9,13 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #E53935;
-            --accent: #FF6F00;
+            /* App brand colors: Primary #FF6347 (Tomato Red), Accent #FF8C42 (Bright Orange) */
+            --primary: #FF6347;
+            --accent: #FF8C42;
             --bg-dark: #0a0a0a;
             --bg-card: #141414;
             --text-primary: #ffffff;
             --text-secondary: #888888;
-            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            --gradient: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
         }
 
         * {
@@ -40,7 +41,10 @@
 
         .back-link {
             display: inline-block;
-            color: var(--accent);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
             margin-bottom: 24px;
             font-size: 0.95rem;
@@ -49,6 +53,7 @@
 
         .back-link:hover {
             text-decoration: underline;
+            text-decoration-color: var(--primary);
         }
 
         h1 {
@@ -79,7 +84,10 @@
             font-family: 'Bebas Neue', sans-serif;
             font-size: 1.5rem;
             letter-spacing: 1px;
-            color: var(--accent);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-top: 32px;
             margin-bottom: 16px;
         }
@@ -108,12 +116,15 @@
         }
 
         a {
-            color: var(--accent);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .highlight {
-            background: rgba(255, 111, 0, 0.1);
-            border-left: 3px solid var(--accent);
+            background: rgba(255, 99, 71, 0.1);
+            border-left: 3px solid var(--primary);
             padding: 16px;
             border-radius: 0 8px 8px 0;
             margin: 16px 0;
