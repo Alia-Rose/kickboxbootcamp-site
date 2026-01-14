@@ -226,76 +226,6 @@
             }
         }
 
-        /* Features Section */
-        .features {
-            padding: 80px 24px 120px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--gradient);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 99, 71, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        .feature-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .feature-desc {
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
         /* Footer */
         .footer {
             border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -333,10 +263,6 @@
             .logo-bootcamp {
                 letter-spacing: 10px;
                 margin-left: 12px;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
             }
 
             .footer-links {
@@ -384,26 +310,6 @@
                 Get it on Google Play
             </a>
             <p class="free-trial"><strong>14-day free trial</strong> • No credit card required</p>
-        </div>
-    </section>
-
-    <section class="features">
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🥊</div>
-                <h3 class="feature-title">Unlimited Workouts</h3>
-                <p class="feature-desc">Boxing, kickboxing, and bodyweight combos that never repeat. Fresh routines every time.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3 class="feature-title">Customizable</h3>
-                <p class="feature-desc">Set your duration, intensity, and focus areas. Your workout, your rules.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔊</div>
-                <h3 class="feature-title">Audio Coaching</h3>
-                <p class="feature-desc">Real-time voice guidance keeps you on track. Just press play and follow along.</p>
-            </div>
         </div>
     </section>
 
