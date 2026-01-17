@@ -11,11 +11,9 @@
         :root {
             --primary: #FF6347;
             --accent: #FF8C42;
-            --bg-dark: #0a0a0a;
-            --bg-card: #141414;
+            --bg-dark: #1a1a1a;
             --text-primary: #ffffff;
             --text-secondary: #888888;
-            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
         }
 
         * {
@@ -70,7 +68,7 @@
         .card {
             position: relative;
             z-index: 1;
-            background: var(--bg-card);
+            background: var(--bg-dark);
             border-radius: 16px;
             padding: 48px 40px;
             text-align: center;
@@ -94,7 +92,7 @@
             width: 72px;
             height: 72px;
             border-radius: 50%;
-            background: var(--gradient);
+            background: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -111,10 +109,7 @@
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 12px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary);
         }
 
         .message {
@@ -126,7 +121,7 @@
 
         .btn {
             display: inline-block;
-            background: var(--gradient);
+            background: var(--primary);
             color: #000;
             padding: 16px 32px;
             border-radius: 12px;
@@ -162,10 +157,7 @@
         }
 
         .logo-kickbox {
-            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary);
         }
 
         .logo-bootcamp {
@@ -174,6 +166,25 @@
             letter-spacing: 8px;
             display: block;
             margin-left: 4px;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 99, 71, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 14px;
+            color: var(--text-secondary);
         }
     </style>
 </head>
@@ -196,15 +207,32 @@
         </div>
         <h1 class="title">Email Confirmed!</h1>
         <p class="message">Your email address has been successfully updated. You can now close this page and return to the app.</p>
-        <a href="kickbox://account" class="btn">Open App</a>
-        <p class="hint">If the button doesn't work, open Kickbox Bootcamp manually</p>
+        <a href="kickboxbootcamp://auth/email-confirmed" class="btn" id="openAppBtn">Open App</a>
+        <div id="loadingIndicator" style="display: none;">
+            <div class="spinner"></div>
+            <p class="loading-text">Opening app...</p>
+        </div>
+        <p class="hint">If the app doesn't open automatically, tap the button above</p>
     </div>
 
     <script>
-        // Attempt to open the app automatically after a short delay
-        setTimeout(function() {
-            window.location.href = 'kickbox://account';
-        }, 1500);
+        var appDeepLink = 'kickboxbootcamp://auth/email-confirmed';
+
+        function openApp() {
+            document.getElementById('loadingIndicator').style.display = 'block';
+            window.location.href = appDeepLink;
+
+            setTimeout(function() {
+                document.getElementById('loadingIndicator').style.display = 'none';
+            }, 2000);
+        }
+
+        setTimeout(openApp, 1000);
+
+        document.getElementById('openAppBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            openApp();
+        });
     </script>
 </body>
 </html>
