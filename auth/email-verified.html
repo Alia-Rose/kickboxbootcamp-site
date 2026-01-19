@@ -249,6 +249,7 @@
             <p class="loading-text">Opening app...</p>
         </div>
         <p class="hint">If the app doesn't open automatically, tap the button above</p>
+        <p id="debugInfo" class="hint" style="margin-top: 16px; word-break: break-all; font-size: 11px;"></p>
     </div>
 
     <script>
@@ -287,6 +288,15 @@
         }
 
         var appDeepLink = buildDeepLink();
+
+        // Debug: Show what we received
+        var debugEl = document.getElementById('debugInfo');
+        var tokens = getTokensFromHash();
+        if (tokens) {
+            debugEl.textContent = 'Tokens received! Deep link: ' + appDeepLink.substring(0, 80) + '...';
+        } else {
+            debugEl.textContent = 'No tokens in URL. Hash: "' + window.location.hash + '"';
+        }
 
         function openApp() {
             document.getElementById('loadingIndicator').style.display = 'block';
