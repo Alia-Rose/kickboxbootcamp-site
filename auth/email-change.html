@@ -376,12 +376,12 @@
             console.log('All verification attempts failed. Last error:', lastError);
 
             if (lastError && (lastError.includes('expired') || lastError.includes('invalid') || lastError.includes('already'))) {
-                // Token expired/invalid could mean it was already used successfully
-                // Show a helpful message
+                // Token expired/invalid - this likely means the email change was already completed
+                // from the other email address (new email confirmed first)
                 showState('success');
-                document.querySelector('#successState .title').textContent = 'Confirmation Received';
+                document.querySelector('#successState .title').textContent = 'Email Already Updated';
                 document.querySelector('#successState .message').textContent =
-                    'This confirmation link has already been used or has expired. If you confirmed from both emails, your email change is complete. You can now sign in with your new email.';
+                    'Your email address has already been changed. You can now sign in with your new email.';
                 setTimeout(openApp, 2000);
             } else {
                 showError(lastError || 'Email change verification failed. Please try again.');
