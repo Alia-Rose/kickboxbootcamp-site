@@ -326,57 +326,65 @@
                 return;
             }
 
-            try {
-                // Call Supabase verifyOtp endpoint with email_change type
-                var response = await fetch(SUPABASE_URL + '/auth/v1/verify', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_ANON_KEY
-                    },
-                    body: JSON.stringify({
-                        token_hash: tokenHash,
-                        type: 'email_change'
-                    })
-                });
+            // Try email_change type first (for new email confirmation)
+            // If that fails, try email_change type with different approach
+            var typesToTry = ['email_change'];
+            var lastError = null;
 
-                var data = await response.json();
+            for (var i = 0; i < typesToTry.length; i++) {
+                var type = typesToTry[i];
+                console.log('Trying verification with type:', type);
 
-                if (!response.ok) {
-                    throw new Error(data.error_description || data.message || 'Verification failed');
+                try {
+                    var response = await fetch(SUPABASE_URL + '/auth/v1/verify', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apikey': SUPABASE_ANON_KEY
+                        },
+                        body: JSON.stringify({
+                            token_hash: tokenHash,
+                            type: type
+                        })
+                    });
+
+                    var data = await response.json();
+                    console.log('Response for type', type, ':', response.status, data);
+
+                    if (response.ok) {
+                        // Success! Extract tokens from response
+                        if (data.access_token && data.refresh_token) {
+                            accessToken = data.access_token;
+                            refreshToken = data.refresh_token;
+                        }
+
+                        // Show success and auto-open app
+                        showState('success');
+                        setTimeout(openApp, 1500);
+                        return;
+                    } else {
+                        lastError = data.error_description || data.message || 'Verification failed';
+                        console.log('Verification failed with type', type, ':', lastError);
+                    }
+                } catch (error) {
+                    console.error('Error with type', type, ':', error);
+                    lastError = error.message;
                 }
+            }
 
-                // Extract tokens from response
-                if (data.access_token && data.refresh_token) {
-                    accessToken = data.access_token;
-                    refreshToken = data.refresh_token;
+            // All types failed - check if it's a "already confirmed" situation
+            console.log('All verification attempts failed. Last error:', lastError);
 
-                    // Show success and auto-open app
-                    showState('success');
-                    setTimeout(openApp, 1500);
-                } else {
-                    // Email changed but no tokens (edge case)
-                    showState('success');
-                    setTimeout(openApp, 1500);
-                }
-
-            } catch (error) {
-                console.error('Email change verification error:', error);
-
-                // Check for common errors
-                if (error.message.includes('expired') || error.message.includes('invalid')) {
-                    // Token expired could mean it was already used successfully
-                    showState('success');
-                    document.querySelector('#successState .message').textContent =
-                        'Your email has been updated! You can now sign in with your new email address.';
-                    setTimeout(openApp, 1500);
-                } else if (error.message.includes('already')) {
-                    // Already changed - still success
-                    showState('success');
-                    setTimeout(openApp, 1500);
-                } else {
-                    showError(error.message || 'Email change failed. Please try again.');
-                }
+            if (lastError && (lastError.includes('expired') || lastError.includes('invalid') || lastError.includes('already'))) {
+                // Token expired/invalid could mean it was already used successfully
+                // Show a helpful message
+                showState('success');
+                document.querySelector('#successState .title').textContent = 'Confirmation Received';
+                document.querySelector('#successState .message').textContent =
+                    'This confirmation link has already been used or has expired. If you confirmed from both emails, your email change is complete. You can now sign in with your new email.';
+                setTimeout(openApp, 2000);
+            } else {
+                showError(lastError || 'Email change verification failed. Please try again.');
             }
         }
 
