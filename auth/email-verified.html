@@ -249,59 +249,12 @@
             <p class="loading-text">Opening app...</p>
         </div>
         <p class="hint">If the app doesn't open automatically, tap the button above</p>
-        <div id="debugInfo" style="margin-top: 24px; padding: 16px; background: #1a1a1a; border-radius: 8px; text-align: left; font-size: 12px; word-break: break-all;">
-            <p style="color: #FF6347; margin-bottom: 8px;"><strong>Debug Info:</strong></p>
-            <p id="debugHash" style="color: #888; margin-bottom: 4px;">Hash: loading...</p>
-            <p id="debugTokens" style="color: #888; margin-bottom: 4px;">Tokens: loading...</p>
-            <p id="debugDeepLink" style="color: #888;">Deep Link: loading...</p>
-        </div>
     </div>
 
     <script>
-        // Extract tokens from URL hash (Supabase passes #access_token=...&refresh_token=...)
-        function getTokensFromHash() {
-            var hash = window.location.hash.substring(1);
-            if (!hash) return null;
-
-            var params = {};
-            hash.split('&').forEach(function(part) {
-                var item = part.split('=');
-                if (item.length === 2) {
-                    params[decodeURIComponent(item[0])] = decodeURIComponent(item[1]);
-                }
-            });
-
-            if (params.access_token && params.refresh_token) {
-                return {
-                    access_token: params.access_token,
-                    refresh_token: params.refresh_token
-                };
-            }
-            return null;
-        }
-
-        function buildDeepLink() {
-            var tokens = getTokensFromHash();
-            var baseLink = 'kickboxbootcamp://auth/verified';
-
-            if (tokens) {
-                // Pass tokens to app for auto-login
-                return baseLink + '?access_token=' + encodeURIComponent(tokens.access_token) +
-                       '&refresh_token=' + encodeURIComponent(tokens.refresh_token);
-            }
-            return baseLink;
-        }
-
-        var appDeepLink = buildDeepLink();
-
-        // Update debug info
-        document.getElementById('debugHash').textContent = 'Hash: ' + (window.location.hash || '(empty)');
-        document.getElementById('debugTokens').textContent = 'Tokens: ' + (getTokensFromHash() ? 'Found!' : 'Not found');
-        document.getElementById('debugDeepLink').textContent = 'Deep Link: ' + appDeepLink;
-
         function openApp() {
             document.getElementById('loadingIndicator').style.display = 'block';
-            window.location.href = appDeepLink;
+            window.location.href = 'kickboxbootcamp://auth/verified';
 
             setTimeout(function() {
                 document.getElementById('loadingIndicator').style.display = 'none';
