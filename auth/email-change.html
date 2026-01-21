@@ -362,7 +362,8 @@
                         showState('success');
                         return;
                     } else {
-                        lastError = data.error_description || data.message || 'Verification failed';
+                        // Extract error message - Supabase returns error in 'msg' field
+                        lastError = data.msg || data.error_description || data.message || 'Verification failed';
                         console.log('Verification failed with type', type, ':', lastError);
                     }
                 } catch (error) {
