@@ -358,9 +358,8 @@
                             refreshToken = data.refresh_token;
                         }
 
-                        // Show success and auto-open app
+                        // Show success (user can tap button to open app)
                         showState('success');
-                        setTimeout(openApp, 1500);
                         return;
                     } else {
                         lastError = data.error_description || data.message || 'Verification failed';
@@ -377,12 +376,10 @@
 
             if (lastError && (lastError.includes('expired') || lastError.includes('invalid') || lastError.includes('already'))) {
                 // Token expired/invalid - this likely means the email change was already completed
-                // from the other email address (new email confirmed first)
                 showState('success');
                 document.querySelector('#successState .title').textContent = 'Email Already Updated';
                 document.querySelector('#successState .message').textContent =
                     'Your email address has already been changed. You can now sign in with your new email.';
-                setTimeout(openApp, 2000);
             } else {
                 showError(lastError || 'Email change verification failed. Please try again.');
             }
