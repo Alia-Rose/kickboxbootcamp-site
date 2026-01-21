@@ -345,37 +345,43 @@
                 var data = await response.json();
 
                 if (!response.ok) {
-                    throw new Error(data.error_description || data.message || 'Verification failed');
+                    // Supabase returns error in 'msg' field
+                    throw new Error(data.msg || data.error_description || data.message || 'Verification failed');
                 }
 
                 // Extract tokens from response
                 if (data.access_token && data.refresh_token) {
                     accessToken = data.access_token;
                     refreshToken = data.refresh_token;
-
-                    // Show success and auto-open app
-                    showState('success');
-                    setTimeout(openApp, 1500);
-                } else {
-                    // Email verified but no tokens (edge case)
-                    showState('success');
-                    setTimeout(openApp, 1500);
                 }
+
+                // Update messaging based on type
+                if (type === 'email_change') {
+                    document.querySelector('#successState .title').textContent = 'Email Updated!';
+                    document.querySelector('#successState .message').textContent =
+                        'Your email address has been successfully changed. You can now sign in with your new email.';
+                }
+
+                // Show success and auto-open app
+                showState('success');
+                setTimeout(openApp, 1500);
 
             } catch (error) {
                 console.error('Verification error:', error);
 
                 // Check for common errors
-                if (error.message.includes('expired') || error.message.includes('invalid')) {
-                    // Token expired could mean it was already used successfully
+                if (error.message.includes('expired') || error.message.includes('invalid') || error.message.includes('already')) {
+                    // Token expired/invalid could mean it was already used successfully
                     // Show a friendly message that covers both cases
                     showState('success');
-                    document.querySelector('#successState .message').textContent =
-                        'Your email has been verified! You can now sign in to the app.';
-                    setTimeout(openApp, 1500);
-                } else if (error.message.includes('already')) {
-                    // Email already verified - still success
-                    showState('success');
+                    if (type === 'email_change') {
+                        document.querySelector('#successState .title').textContent = 'Email Already Updated';
+                        document.querySelector('#successState .message').textContent =
+                            'Your email address has already been changed. You can now sign in with your new email.';
+                    } else {
+                        document.querySelector('#successState .message').textContent =
+                            'Your email has been verified! You can now sign in to the app.';
+                    }
                     setTimeout(openApp, 1500);
                 } else {
                     showError(error.message || 'Verification failed. Please try again.');
