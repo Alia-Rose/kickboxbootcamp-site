@@ -318,8 +318,9 @@
 
         async function verifyEmail() {
             // Get token_hash and type from URL
+            // Support both 'token_hash' (our custom templates) and 'token' (Supabase default)
             var urlParams = new URLSearchParams(window.location.search);
-            var tokenHash = urlParams.get('token_hash');
+            var tokenHash = urlParams.get('token_hash') || urlParams.get('token');
             var type = urlParams.get('type') || 'signup';
 
             if (!tokenHash) {
