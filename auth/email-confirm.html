@@ -318,9 +318,9 @@
 
         async function verifyEmail() {
             // Get token_hash and type from URL
-            // Support both 'token_hash' (our custom templates) and 'token' (Supabase default)
+            // This page is for signup confirmation ONLY
             var urlParams = new URLSearchParams(window.location.search);
-            var tokenHash = urlParams.get('token_hash') || urlParams.get('token');
+            var tokenHash = urlParams.get('token_hash');
             var type = urlParams.get('type') || 'signup';
 
             if (!tokenHash) {
