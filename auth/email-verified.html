@@ -252,9 +252,34 @@
     </div>
 
     <script>
+        function buildDeepLink() {
+            var baseLink = 'kickboxbootcamp://auth/verified';
+            var params = [];
+
+            // Check for tokens in URL hash (Supabase default redirect format)
+            if (window.location.hash) {
+                var hashParams = new URLSearchParams(window.location.hash.substring(1));
+                var accessToken = hashParams.get('access_token');
+                var refreshToken = hashParams.get('refresh_token');
+                if (accessToken) params.push('access_token=' + encodeURIComponent(accessToken));
+                if (refreshToken) params.push('refresh_token=' + encodeURIComponent(refreshToken));
+            }
+
+            // Check for token_hash in query params (from email template)
+            var queryParams = new URLSearchParams(window.location.search);
+            var tokenHash = queryParams.get('token_hash');
+            var type = queryParams.get('type');
+            if (tokenHash) params.push('token_hash=' + encodeURIComponent(tokenHash));
+            if (type) params.push('type=' + encodeURIComponent(type));
+
+            return params.length > 0 ? baseLink + '?' + params.join('&') : baseLink;
+        }
+
         function openApp() {
             document.getElementById('loadingIndicator').style.display = 'block';
-            window.location.href = 'kickboxbootcamp://auth/verified';
+            var deepLink = buildDeepLink();
+            document.getElementById('openAppBtn').href = deepLink;
+            window.location.href = deepLink;
 
             setTimeout(function() {
                 document.getElementById('loadingIndicator').style.display = 'none';

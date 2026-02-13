@@ -290,6 +290,8 @@
 
         var accessToken = null;
         var refreshToken = null;
+        var pageTokenHash = null;
+        var pageType = null;
 
         function showState(state) {
             document.getElementById('loadingState').classList.remove('active');
@@ -305,11 +307,19 @@
 
         function buildDeepLink() {
             var baseLink = 'kickboxbootcamp://auth/verified';
-            if (accessToken && refreshToken) {
-                return baseLink + '?access_token=' + encodeURIComponent(accessToken) +
-                       '&refresh_token=' + encodeURIComponent(refreshToken);
+            var params = [];
+            // Always include token_hash and type so the app can verify directly as fallback
+            if (pageTokenHash) {
+                params.push('token_hash=' + encodeURIComponent(pageTokenHash));
             }
-            return baseLink;
+            if (pageType) {
+                params.push('type=' + encodeURIComponent(pageType));
+            }
+            if (accessToken && refreshToken) {
+                params.push('access_token=' + encodeURIComponent(accessToken));
+                params.push('refresh_token=' + encodeURIComponent(refreshToken));
+            }
+            return params.length > 0 ? baseLink + '?' + params.join('&') : baseLink;
         }
 
         function openApp() {
@@ -322,6 +332,10 @@
             var urlParams = new URLSearchParams(window.location.search);
             var tokenHash = urlParams.get('token_hash');
             var type = urlParams.get('type') || 'signup';
+
+            // Store for deep link building (so app can verify directly as fallback)
+            pageTokenHash = tokenHash;
+            pageType = type;
 
             if (!tokenHash) {
                 showError('Invalid verification link. Please check your email and try again.');
