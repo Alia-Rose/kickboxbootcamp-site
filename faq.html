@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Kickbox Bootcamp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* App brand colors: Primary #FF6347 (Tomato Red), Accent #FF8C42 (Bright Orange) */
+            --primary: #FF6347;
+            --accent: #FF8C42;
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --gradient: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: var(--bg-dark);
+            min-height: 100vh;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: linear-gradient(90deg, #FF6347, #FF8C42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: saturate(1.3);
+            text-decoration: none;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+            text-decoration-color: #FF6347;
+        }
+
+        h1 {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 800;
+            font-size: 3rem;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #FF6347, #FF8C42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: saturate(1.3);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+        }
+
+        .content {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        h2 {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #FF6347, #FF8C42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: saturate(1.3);
+            margin-top: 32px;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        h2:first-child {
+            margin-top: 0;
+        }
+
+        .faq-item {
+            margin-bottom: 4px;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            color: var(--primary);
+        }
+
+        .faq-question h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+            flex: 1;
+            padding-right: 16px;
+        }
+
+        .faq-question:hover h3 {
+            color: var(--primary);
+        }
+
+        .faq-toggle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-item.open .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 1000px;
+            padding: 16px 0;
+        }
+
+        .faq-answer p {
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-answer ul, .faq-answer ol {
+            color: #ccc;
+            margin-bottom: 12px;
+            padding-left: 24px;
+        }
+
+        .faq-answer li {
+            margin-bottom: 4px;
+        }
+
+        strong {
+            color: var(--text-primary);
+        }
+
+        a {
+            background: linear-gradient(90deg, #FF6347, #FF8C42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: saturate(1.3);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            text-decoration-color: #FF6347;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; Back to Home</a>
+
+        <h1>FAQ</h1>
+        <p class="subtitle">Frequently Asked Questions about Kickbox Bootcamp</p>
+
+        <div class="content">
+
+            <h2>Getting Started</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What is Kickbox Bootcamp?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Kickbox Bootcamp is a workout app that generates structured training routines combining boxing, kickboxing, and bodyweight exercises into dynamic sets. Unlike follow-along videos or traditional classes, the app algorithmically builds unique workouts with over 6 million possible configurations &mdash; so no two sessions are the same. It features voice-guided coaching, detailed workout tracking, and over 110 exercises across three difficulty levels.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Do I need any equipment to use the app?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>No. Every exercise can be performed equipment-free using shadowboxing or light dumbbells. If you have a boxing bag, you can enable the Boxing Bag toggle in Workout Setup and the app will adapt exercise descriptions to include bag-specific techniques.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What are the different difficulty levels?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>There are three difficulty levels:</p>
+                    <ul>
+                        <li><strong>Beginner</strong> &mdash; Perfect for those new to boxing and kickboxing. Focuses on basic techniques with lower intensity.</li>
+                        <li><strong>Intermediate</strong> &mdash; Builds on the basics with more complex combinations and increased intensity.</li>
+                        <li><strong>Advanced</strong> &mdash; Intense workouts for experienced athletes with challenging exercises and higher rep counts.</li>
+                    </ul>
+                    <p>You choose your difficulty level during workout setup, and the app selects exercises appropriate for that level.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I set up my first workout?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>When you first open the app, an onboarding tutorial walks you through the setup process step by step. You'll choose your workout duration, set type, difficulty, and other preferences. Once configured, tap "Generate Workout" to create your session, preview it, and start training.</p>
+                </div>
+            </div>
+
+            <h2>Workouts</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Why is every workout different?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The app uses an algorithm that combines your chosen settings &mdash; duration, difficulty, set type, focus mode, equipment preference, and more &mdash; to randomly select and arrange exercises from a database of over 110 movements. With all the possible combinations of exercises, set structures, and configurations, there are over 6 million unique workout configurations.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What are the different set types?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The app offers five set types, each with a different training structure:</p>
+                    <ul>
+                        <li><strong>Continuous</strong> &mdash; Perform exercises one after another for the full set duration. No built-in rest between exercises within the set.</li>
+                        <li><strong>Interval</strong> &mdash; Alternating work and rest periods (e.g., 45 seconds on, 15 seconds off). Great for building endurance.</li>
+                        <li><strong>Pyramid</strong> &mdash; Three exercises (one boxing, one kickboxing, one bodyweight) performed with ascending reps in the UP set, then the same three exercises repeated with descending reps in the DOWN set.</li>
+                        <li><strong>Wave</strong> &mdash; Three exercises performed in a wave pattern with varying intensity levels throughout the set.</li>
+                        <li><strong>Up-Down</strong> &mdash; Paired exercises that combine a standing movement with a ground movement for full-body engagement.</li>
+                    </ul>
+                    <p>You can also use "Mixed" to combine different set types within a single workout.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What does the Boxing Bag toggle do?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>When enabled, exercises that can be performed on a bag will show bag-specific descriptions and techniques. When disabled, those same exercises are described as shadowboxing movements or use light dumbbells instead. The exercise selection stays the same &mdash; only the descriptions change.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I customize my workout duration?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. Available durations are 30, 45, 60, 75, 90, 105, and 120 minutes. You can also adjust set duration (3, 4, or 5 minutes per set) and rest periods between sets.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What are focus modes?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Focus modes let you bias the exercise selection toward a specific training goal:</p>
+                    <ul>
+                        <li><strong>Balanced</strong> &mdash; Even mix of boxing, kickboxing, and bodyweight exercises.</li>
+                        <li><strong>Boxing Heavy</strong> &mdash; More boxing combos and punches. Great for upper body.</li>
+                        <li><strong>Kickboxing Heavy</strong> &mdash; More kicks and kickboxing combos. Great for legs.</li>
+                        <li><strong>Core</strong> &mdash; Emphasis on core-strengthening exercises.</li>
+                        <li><strong>Cardio</strong> &mdash; High-intensity cardio focus for maximum calorie burn.</li>
+                        <li><strong>Technique</strong> &mdash; Basic techniques for form practice and learning.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What are warm-up, running, and jump rope intervals?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>These are optional additions to your workout:</p>
+                    <ul>
+                        <li><strong>Warm-up</strong> &mdash; A dedicated warm-up set at the beginning of your workout. Options include stretching and mobility exercises, a running warm-up, or a jump rope warm-up.</li>
+                        <li><strong>Running intervals</strong> &mdash; 3-minute running sessions placed between exercise sets for cardio conditioning.</li>
+                        <li><strong>Jump rope intervals</strong> &mdash; 3-minute jump rope sessions as an alternative to running for cardio.</li>
+                    </ul>
+                    <p>You can configure how many running or jump rope intervals to include and whether to place the final one at the end as a finishing burst.</p>
+                </div>
+            </div>
+
+            <h2>Workout Preview</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I preview my workout before starting?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. After generating a workout, you'll see the full Workout Preview screen showing every set, exercise, rep count, and timing. You can review the entire session before tapping "Start Workout."</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I swap exercises in a workout?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. On the Workout Preview screen, tap the refresh icon next to any exercise to swap it for a different one of the same type. This lets you fine-tune your workout before starting.</p>
+                </div>
+            </div>
+
+            <h2>During a Workout</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How does voice coaching work?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Voice coaching provides audio guidance throughout your workout. It announces exercise names, counts down transitions, calls out rep counts, and alerts you to stance switches and halfway points &mdash; so you can train without looking at your phone. You can tap on any exercise during the workout to see its full technique description.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I change the voice or switch to beeps?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. In Settings &gt; Countdown Mode, you can switch between:</p>
+                    <ul>
+                        <li><strong>Voice</strong> &mdash; A coach voice that announces exercises and counts down. You can choose from four voices: Adam (American male), Sarah (American female), George (British male), and Alice (British female).</li>
+                        <li><strong>Beeps</strong> &mdash; Simple beep sounds for countdowns and transitions, with no voice announcements.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What are halfway announcements?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>When enabled, you'll hear an audio cue at the midpoint of each exercise. This is helpful for exercises that switch sides (e.g., "Switch stance" at the halfway mark of a jab combination) or simply to let you know you're halfway through.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I swap exercises during a workout?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. When the Reroll Exercises setting is enabled in Settings, a refresh icon appears during rest periods. Tap it to swap the upcoming exercise for a different one without stopping your workout.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I pause or skip during a workout?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. During a workout you can pause at any time. You can also skip to the next set if you want to move on.</p>
+                </div>
+            </div>
+
+            <h2>Tracking &amp; History</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I view my workout history?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Tap the History tab in the bottom navigation bar. You'll see a list of all completed workouts with details including date, duration, number of sets, exercises performed, and rest time. Tap any workout to see a full breakdown.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What do the Insights charts show?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The Insights tab (bottom navigation bar) shows your training patterns over time. You can filter all data by time range: 7 days, 30 days, 90 days, 1 year, or all time.</p>
+                    <ul>
+                        <li><strong>Overview</strong> &mdash; Total workouts, total time, and average duration.</li>
+                        <li><strong>Activity Over Time</strong> &mdash; A line chart of your workout frequency across the selected time range.</li>
+                        <li><strong>Workout Patterns</strong> &mdash; Your most active day and a day-of-week breakdown showing how often you train each day.</li>
+                        <li><strong>Exercise Distribution</strong> &mdash; A pie chart showing the balance between boxing, kickboxing, and bodyweight exercises.</li>
+                        <li><strong>Most Frequent Exercises</strong> &mdash; Your top 5 most-performed exercises ranked by count.</li>
+                        <li><strong>Body Parts Trained</strong> &mdash; How balanced your training is across different muscle groups, with highlights for underworked areas.</li>
+                        <li><strong>Personal Records</strong> &mdash; Longest workout, most sets in a single session, longest day streak, and top exercise.</li>
+                        <li><strong>Milestones</strong> &mdash; Progress toward your next workout milestone and your latest achievement.</li>
+                        <li><strong>Smart Insights</strong> &mdash; Automated training insights with recommendations based on your workout patterns.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Is my workout data backed up?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. If you're signed in with an account, your workout history is automatically saved to the cloud. Your data syncs across all your devices &mdash; just sign in on another device and your full history will be available.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I export or import my workout history?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. In Settings &gt; Account:</p>
+                    <ul>
+                        <li><strong>Export Workout History</strong> &mdash; Saves your workout data as a file you can share or back up.</li>
+                        <li><strong>Import Workout History</strong> &mdash; Loads previously exported workout data into the app.</li>
+                    </ul>
+                    <p>This is useful for creating local backups or sharing your data outside the app.</p>
+                </div>
+            </div>
+
+            <h2>Account &amp; Devices</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I create an account?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Tap Settings &gt; Manage Account, then follow the sign-up flow. You can register with an email and password or sign in with Google. An account enables cloud features like automatic workout history backup and sync, device management, and referrals.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How many devices can I use?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>You can be logged in on up to 3 devices simultaneously. If you try to sign in on a 4th device, you'll see a "Device limit reached" message. You can free up a slot by signing out from another device &mdash; either directly on that device or remotely through the Manage Devices screen.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I sign out from another device remotely?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Go to Settings &gt; Manage Account &gt; Manage Devices. You'll see a list of all devices where you're signed in, including device name, model, and when it was last active. Tap "Sign Out" next to any device to remove it. The next time that device opens the app, it will be signed out automatically.</p>
+                    <p>You can also use "Sign Out All Other Devices" to remove all devices except the one you're currently using.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I change my email or password?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Go to Settings &gt; Manage Account. From there you can:</p>
+                    <ul>
+                        <li><strong>Change Email</strong> &mdash; Enter a new email address. You'll receive a confirmation link.</li>
+                        <li><strong>Change Password</strong> &mdash; Enter your current password and set a new one.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I delete my account?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Go to Settings &gt; Manage Account, scroll to the Danger Zone section, and tap "Delete Account." You'll be asked to confirm by entering your password. This permanently deletes your account, all device sessions, and all associated data. This action cannot be undone.</p>
+                </div>
+            </div>
+
+            <h2>Free vs Pro</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What features are free?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Free users get full access to workouts with these settings:</p>
+                    <ul>
+                        <li>Workout duration: 30 minutes</li>
+                        <li>Set types: Continuous and Interval</li>
+                        <li>Focus mode: Balanced</li>
+                        <li>Voice: Adam</li>
+                        <li>Workout history: last 5 workouts</li>
+                        <li>All 110+ exercises at all difficulty levels</li>
+                    </ul>
+                    <p>Most locked features can be temporarily unlocked by watching a short ad.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I unlock features by watching ads?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Features marked with an "AD" badge can be unlocked for the current session by watching a short rewarded video ad. Simply tap the AD badge next to any locked feature, watch the ad, and the feature becomes available immediately. Ad unlocks reset when you close the app.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What does upgrading to Pro include?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Pro gives you permanent, unlimited access to everything:</p>
+                    <ul>
+                        <li>All workout durations (30&ndash;120 minutes)</li>
+                        <li>All 5 set types (including Pyramid, Wave, and Up-Down)</li>
+                        <li>All 6 focus modes</li>
+                        <li>All 4 voice coaches</li>
+                        <li>Full workout history (unlimited)</li>
+                        <li>Exercise management (adjust frequency and reps)</li>
+                        <li>Reroll exercises during workouts</li>
+                        <li>Custom interval timing</li>
+                        <li>Warm-up, running, and jump rope intervals</li>
+                        <li>No ads</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I cancel my subscription?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Subscriptions are managed through Google Play. To cancel:</p>
+                    <ol>
+                        <li>Open the Google Play Store app</li>
+                        <li>Tap your profile icon &gt; Payments &amp; subscriptions &gt; Subscriptions</li>
+                        <li>Find "Kickbox Bootcamp" and tap Cancel</li>
+                    </ol>
+                    <p>You'll continue to have Pro access until the end of your current billing period.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I restore my purchase?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>If you've previously subscribed and need to restore your purchase (e.g., after reinstalling the app or switching devices), simply sign in with the same account. Your subscription status is tied to your Google Play account and will be restored automatically.</p>
+                </div>
+            </div>
+
+            <h2>Settings &amp; Troubleshooting</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I manage which exercises appear in my workouts?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Go to Settings &gt; Exercise Management &gt; Manage Exercises. From there you can:</p>
+                    <ul>
+                        <li>View all exercises by category and difficulty</li>
+                        <li>Adjust how frequently each exercise appears</li>
+                        <li>Modify rep counts for individual exercises</li>
+                        <li>Filter by exercise type (boxing, kickboxing, bodyweight)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What does "Reset All Settings" do?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>It restores all app settings to their default values &mdash; including audio preferences, workout configuration, and display options. Your workout history and account are not affected.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What does "Clear Workout History" do?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>It permanently deletes all recorded past workouts from the app. This cannot be undone. Your account and settings are not affected.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I replay the onboarding or tutorials?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>In Settings &gt; Support &amp; Help:</p>
+                    <ul>
+                        <li><strong>Replay Onboarding</strong> &mdash; Shows the initial app introduction screens again.</li>
+                        <li><strong>Replay Tutorials</strong> &mdash; Re-enables the step-by-step tutorial guides that appear on each screen.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Voice coaching isn't working &mdash; what should I do?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Try these steps:</p>
+                    <ol>
+                        <li>Check that your device volume is turned up and not on silent/vibrate mode.</li>
+                        <li>In Settings, make sure Countdown Mode is set to "Voice" (not "Beeps").</li>
+                        <li>Check the Audio Volume slider in Settings &mdash; make sure it's not at 0%.</li>
+                        <li>Try closing and reopening the app.</li>
+                        <li>If the issue persists, go to Settings &gt; Support &amp; Help &gt; Contact Support to reach our team.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I contact support?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Go to Settings &gt; Support &amp; Help &gt; Contact Support. This opens a form where you can describe your issue and send it directly to our support team.</p>
+                </div>
+            </div>
+
+            <h2>Referrals</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How does the Invite Friends / referral program work?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>In Settings &gt; Share &amp; Earn &gt; Invite Friends, you'll find your unique referral code and a share button. When a friend signs up using your code and subscribes:</p>
+                    <ul>
+                        <li><strong>You</strong> get 1 free month of Pro.</li>
+                        <li><strong>Your friend</strong> gets 50% off their first months.</li>
+                    </ul>
+                    <p>Share your code via text, social media, or any messaging app. You can track your referral stats on the same screen.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 Small Empire Studios. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleFaq(element) {
+            var item = element.parentElement;
+            item.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
