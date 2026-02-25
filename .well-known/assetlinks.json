@@ -1,11 +1,17 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "com.kickboxbootcamp",
-    "sha256_cert_fingerprints": [
-      "74:CA:80:89:F0:99:8E:EF:F5:6A:AD:B5:BC:D0:20:8F:07:6D:E3:62:8A:C8:1A:77:7F:97:A7:BB:BE:3B:8C:4D",
-      "FC:D9:B5:4A:EB:0C:22:D7:C8:77:37:36:C0:6E:C4:D2:5B:5D:33:D9:44:CF:56:A1:4D:B6:60:E1:B8:28:14:ED"
-    ]
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.kickboxbootcamp",
+      "sha256_cert_fingerprints": [
+        "74:CA:80:89:F0:99:8E:EF:F5:6A:AD:B5:BC:D0:20:8F:07:6D:E3:62:8A:C8:1A:77:7F:97:A7:BB:BE:3B:8C:4D",
+        "FC:D9:B5:4A:EB:0C:22:D7:C8:77:37:36:C0:6E:C4:D2:5B:5D:33:D9:44:CF:56:A1:4D:B6:60:E1:B8:28:14:ED",
+        "74:CA:80:89:F0:99:8E:EF:F5:6A:AD:B5:BC:D0:20:8F:07:6D:E3:62:8A:C8:1A:77:7F:97:A7:8B:BE:3B:8C:4D"
+      ]
+    }
   }
-}]
+]
