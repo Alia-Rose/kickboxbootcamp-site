@@ -125,8 +125,8 @@
 
             if (match) {
                 var code = match[1].toUpperCase();
-                var appLink = 'kickbox://ref/' + code;
                 var playStoreLink = 'https://play.google.com/store/apps/details?id=com.kickboxbootcamp&referrer=ref_' + code;
+                var appLink = 'intent://ref/' + code + '#Intent;scheme=kickbox;package=com.kickboxbootcamp;S.browser_fallback_url=' + encodeURIComponent(playStoreLink) + ';end';
 
                 // Show the referral code on page
                 document.addEventListener('DOMContentLoaded', function() {
@@ -141,17 +141,10 @@
                     }
                 });
 
-                // Try to open app, fallback to Play Store
-                var start = Date.now();
+                // Open app (intent:// handles fallback to Play Store automatically)
                 setTimeout(function() {
                     window.location = appLink;
                 }, 100);
-
-                setTimeout(function() {
-                    if (Date.now() - start < 3000) {
-                        window.location = playStoreLink;
-                    }
-                }, 2000);
             } else {
                 // Not a referral link, redirect to home
                 window.location = '/';

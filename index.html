@@ -281,15 +281,9 @@
             var match = path.match(/\/ref\/([A-Z0-9]+)/i);
             if (match) {
                 var code = match[1].toUpperCase();
-                var appLink = 'kickbox://ref/' + code;
                 var playStoreLink = 'https://play.google.com/store/apps/details?id=com.kickboxbootcamp&referrer=ref_' + code;
-                var start = Date.now();
+                var appLink = 'intent://ref/' + code + '#Intent;scheme=kickbox;package=com.kickboxbootcamp;S.browser_fallback_url=' + encodeURIComponent(playStoreLink) + ';end';
                 window.location = appLink;
-                setTimeout(function() {
-                    if (Date.now() - start < 2000) {
-                        window.location = playStoreLink;
-                    }
-                }, 1500);
             }
         })();
     </script>

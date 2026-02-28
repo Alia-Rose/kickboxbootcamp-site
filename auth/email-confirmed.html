@@ -243,7 +243,7 @@
         </div>
         <h1 class="title">Email Confirmed!</h1>
         <p class="message">Your email address has been successfully updated. You can now close this page and return to the app.</p>
-        <a href="kickboxbootcamp://auth/email-confirmed" class="btn" id="openAppBtn">Open App</a>
+        <a href="#" class="btn" id="openAppBtn">Open App</a>
         <div id="loadingIndicator" style="display: none;">
             <div class="spinner"></div>
             <p class="loading-text">Opening app...</p>
@@ -252,7 +252,7 @@
     </div>
 
     <script>
-        var appDeepLink = 'kickboxbootcamp://auth/email-confirmed';
+        var appDeepLink = 'intent://auth/email-confirmed#Intent;scheme=kickboxbootcamp;package=com.kickboxbootcamp;end';
 
         function openApp() {
             document.getElementById('loadingIndicator').style.display = 'block';

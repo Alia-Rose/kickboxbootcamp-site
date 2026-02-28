@@ -304,12 +304,13 @@
         }
 
         function buildDeepLink() {
-            var baseLink = 'kickboxbootcamp://auth/email-changed';
+            var path = 'auth/email-changed';
             if (accessToken && refreshToken) {
-                return baseLink + '?access_token=' + encodeURIComponent(accessToken) +
-                       '&refresh_token=' + encodeURIComponent(refreshToken);
+                var query = '?access_token=' + encodeURIComponent(accessToken) +
+                            '&refresh_token=' + encodeURIComponent(refreshToken);
+                return 'intent://' + path + query + '#Intent;scheme=kickboxbootcamp;package=com.kickboxbootcamp;end';
             }
-            return baseLink;
+            return 'intent://' + path + '#Intent;scheme=kickboxbootcamp;package=com.kickboxbootcamp;end';
         }
 
         function openApp() {

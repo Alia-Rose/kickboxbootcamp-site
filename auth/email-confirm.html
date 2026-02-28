@@ -306,7 +306,7 @@
         }
 
         function buildDeepLink() {
-            var baseLink = 'kickboxbootcamp://auth/verified';
+            var path = 'auth/verified';
             var params = [];
             // Always include token_hash and type so the app can verify directly as fallback
             if (pageTokenHash) {
@@ -319,7 +319,8 @@
                 params.push('access_token=' + encodeURIComponent(accessToken));
                 params.push('refresh_token=' + encodeURIComponent(refreshToken));
             }
-            return params.length > 0 ? baseLink + '?' + params.join('&') : baseLink;
+            var query = params.length > 0 ? '?' + params.join('&') : '';
+            return 'intent://' + path + query + '#Intent;scheme=kickboxbootcamp;package=com.kickboxbootcamp;end';
         }
 
         function openApp() {

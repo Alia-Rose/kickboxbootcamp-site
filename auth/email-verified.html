@@ -243,7 +243,7 @@
         </div>
         <h1 class="title">Email Verified!</h1>
         <p class="message">Your email has been successfully verified. You're all set to start your fitness journey!</p>
-        <a href="kickboxbootcamp://auth/verified" class="btn" id="openAppBtn">Open App</a>
+        <a href="#" class="btn" id="openAppBtn">Open App</a>
         <div id="loadingIndicator" style="display: none;">
             <div class="spinner"></div>
             <p class="loading-text">Opening app...</p>
@@ -253,7 +253,7 @@
 
     <script>
         function buildDeepLink() {
-            var baseLink = 'kickboxbootcamp://auth/verified';
+            var path = 'auth/verified';
             var params = [];
 
             // Check for tokens in URL hash (Supabase default redirect format)
@@ -272,13 +272,13 @@
             if (tokenHash) params.push('token_hash=' + encodeURIComponent(tokenHash));
             if (type) params.push('type=' + encodeURIComponent(type));
 
-            return params.length > 0 ? baseLink + '?' + params.join('&') : baseLink;
+            var query = params.length > 0 ? '?' + params.join('&') : '';
+            return 'intent://' + path + query + '#Intent;scheme=kickboxbootcamp;package=com.kickboxbootcamp;end';
         }
 
         function openApp() {
             document.getElementById('loadingIndicator').style.display = 'block';
             var deepLink = buildDeepLink();
-            document.getElementById('openAppBtn').href = deepLink;
             window.location.href = deepLink;
 
             setTimeout(function() {
